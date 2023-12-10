@@ -1,12 +1,14 @@
-// use std::env;
+use diesel::prelude::*;
+use dotenvy::dotenv;
+use std::env;
 
-// use dotenvy::dotenv;
-// use mysql_async::{prelude::*, Pool};
+// 데이터베이스 연결 및 초기화
+pub fn main_db_connection() -> MysqlConnection {
+  dotenv().ok();
 
-pub async fn db_connector() {
-  // let _ = dotenv();
+  let database_url =
+    env::var("DATABASE_URL").expect("DATABASE_URL must be set in .env");
 
-  // let database_url =
-  //   std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-  // let pool = mysql_async::Pool::new(database_url);
+  MysqlConnection::establish(&database_url)
+    .expect(&format!("Error connecting to {}", database_url))
 }

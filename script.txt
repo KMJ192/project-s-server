@@ -19,4 +19,5 @@ docker run -p 8080:8080 --name 'server' -d --restart always server
 3. 도커 컨테이너 진입
 docker exec -it server /bin/bash
 
+export RUSTC_WRAPPER=sccache -> 터미널 세션 종속
 cargo watch -x run

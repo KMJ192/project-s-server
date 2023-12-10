@@ -2,19 +2,20 @@ use std::time::Duration;
 
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 
-use dotenvy::dotenv;
-
 pub mod lab;
 use lab::test_server::test_server;
 
 pub mod index;
 use index::index_html;
 
-// pub mod connector;
-pub mod user;
-use user::user::{create_user, delete_user, get_user, update_user};
+pub mod connector;
+pub mod schema;
+
 pub mod auth;
+pub mod user;
+
 use auth::auth::{sign_in, sign_out};
+use user::user::{create_user, delete_user, get_user, update_user};
 
 #[get("/")]
 async fn root() -> impl Responder {
@@ -23,10 +24,7 @@ async fn root() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-  let _ = dotenv().ok();
-
-  let database_url =
-    std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+  let connection = connector::main_db::main_db_connection();
 
   HttpServer::new(|| {
     App::new().service(root).service(

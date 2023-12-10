@@ -11,5 +11,6 @@ diesel::table! {
         password -> Varchar,
         created_at -> Timestamp,
         updated_at -> Timestamp,
+        role -> Integer,
     }
 }

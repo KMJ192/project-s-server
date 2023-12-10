@@ -1079,7 +1079,6 @@ dependencies = [
  "diesel",
  "dotenvy",
  "serde",
- "serde_derive",
 ]
 
 [[package]]
