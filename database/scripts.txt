@@ -1,0 +1,6 @@
+
+1. 도커 이미지 빌드
+docker build -t sample-db .
+
+2. 도커 컨테이너 실행
+docker run -p 3306:3306 --name 'sample-db' -d sample-db

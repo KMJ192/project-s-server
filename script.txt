@@ -1,0 +1,22 @@
+
+App-development
+1. 도커 이미지 빌드
+docker build -t dev-server -f ./DockerfileDev .
+
+2. 도커 컨테이너 실행
+docker run -p 8080:8080 --name 'dev-server' -d dev-server
+
+3. 도커 컨테이너 진입
+docker exec -it dev-server /bin/bash
+
+App-production
+1. 도커 이미지 빌드
+docker build -t server -f ./Dockerfile .
+
+2. 도커 컨테이너 실행
+docker run -p 8080:8080 --name 'server' -d --restart always server
+
+3. 도커 컨테이너 진입
+docker exec -it server /bin/bash
+
+cargo watch -x run
